@@ -24,9 +24,9 @@ class TestProcessor(TestCase):
         return [e for e in elements if e.type() == typename]
 
     def test_read(self):
-        dir_path = self._local_dir + '/data/processor'
+        from_dir = self._local_dir + '/data/processor/mml-articles'
         processor = Processor()
-        processor.read(dir_path)
+        processor.read(from_dir)
 
         self.assertEqual(36, len(self.filter_by_type(processor.elements, 'pred')))
         self.assertEqual(10, len(self.filter_by_type(processor.elements, 'struct')))
@@ -36,7 +36,7 @@ class TestProcessor(TestCase):
         self.assertEqual(279, len(self.filter_by_type(processor.elements, 'cluster')))
 
     def copy_resources(self):
-        files = ["index.html", "start.html", "js/mml-reference.js", "css/mml-reference.css"]
+        files = ["index.html", "start.html", "js/mml-var.js", "js/mml-reference.js", "css/mml-reference.css"]
         for file in files:
             src = self._local_dir + "/../html/" + file
             dst = self._local_dir + "/data/processor/" + file
@@ -48,9 +48,10 @@ class TestProcessor(TestCase):
         if os.path.exists(contents_dir):
             shutil.rmtree(contents_dir)
 
-        path = self._local_dir + '/data/processor'
+        from_dir = self._local_dir + '/data/processor/mml-articles'
+        to_dir = self._local_dir + '/data/processor'
         processor = Processor()
-        processor.execute(path)
+        processor.execute(from_dir, to_dir)
 
     def test_copy_only(self):
         self.copy_resources()

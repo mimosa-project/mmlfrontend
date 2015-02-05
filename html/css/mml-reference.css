@@ -173,6 +173,17 @@ span[data-link]:hover {
     background: #0000cc;
 }
 
+span[data-href] {
+    color: #cc0000;
+    font-weight: bold;
+}
+
+span[data-href]:hover {
+    cursor: pointer;
+    color: #ffffff;
+    background: #cc0000;
+}
+
 .mml-element.selected {
     border: 5px solid #adff2f;
 }

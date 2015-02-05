@@ -19,13 +19,13 @@ class Processor:
         self.elements = []
         self.contents = []
 
-    def execute(self, path):
-        self.read(path)
+    def execute(self, from_dir, to_dir):
+        self.read(from_dir)
         self.compose()
-        self.write(path)
+        self.write(to_dir)
 
-    def read(self, path):
-        htmls = glob.glob(path + "/mml-articles/*.html")
+    def read(self, from_dir):
+        htmls = glob.glob(from_dir + "/*.html")
         htmls = humansorted(htmls)
 
         total_count = len(htmls)
@@ -42,12 +42,12 @@ class Processor:
         composer.build()
         self.contents = composer.contents
 
-    def write(self, path):
+    def write(self, to_dir):
         index_writer = IndexWriter()
         index_writer.contents = self.contents
-        index_writer.write(path + '/js/mml-index.js')
+        index_writer.write(to_dir + '/js/mml-index.js')
 
-        contents_dir = path + '/mml-contents'
+        contents_dir = to_dir + '/mml-contents'
         if not os.path.exists(contents_dir):
             time.sleep(0.01)
             os.mkdir(contents_dir)
@@ -61,6 +61,7 @@ class Processor:
             content_writer.write(contents_dir + '/' + content.filename())
 
 if __name__ == '__main__':
-    path = os.path.dirname(__file__) + '/../html'
+    from_dir = os.path.dirname(__file__) + '/../downloaded'
+    to_dir = os.path.dirname(__file__) + '/../html'
     processor = Processor()
-    processor.execute(path)
+    processor.execute(from_dir, to_dir)

@@ -146,17 +146,15 @@ class Element:
             href = a.attrib.get('href')
             if href in link2element:
                 element = link2element[href]
-                a.tag = 'span'
                 a.attrib['data-link'] = element.data_link()
-                del a.attrib['href']
             else:
-                if not href.startswith('mml-articles/'):
-                    a.attrib['href'] = 'mml-articles/' + href
-                    a.attrib['target'] = '_blank'
+                a.attrib['data-href'] = href
+            a.tag = 'span'
+            del a.attrib['href']
 
     def adjust(self):
         # shrink nodes: class = 'txt'
-        txt_nodes = self.defblock.xpath(".//a[@class='txt']")
+        txt_nodes = self.defblock.xpath(".//*[@class='txt']")
         for node in txt_nodes:
             parent = node.getparent()
             child = node.getchildren()[0]
@@ -169,12 +167,6 @@ class Element:
     def html_id(self):
         return 'ELM' + str(self.id)
 
-    def href(self):
-        href = "mml-articles/" + self.filename + ".html"
-        if self.anchor is not None:
-            href += "#" + self.anchor
-        return href
-
     def write(self, fp, i):
         attrs = "class='mml-element' id='" + self.html_id() + "'"
         fp.write("<div " + attrs + ">\n")
@@ -185,8 +177,11 @@ class Element:
         fp.write("</div>\n<hr/>\n")
 
     @staticmethod
-    def source_link_html(element):
-        return "<a href='" + element.href() + "' target='_blank'>" + element.filename + "</a>"
+    def source_link_html(e):
+        href = e.filename + ".html"
+        if e.anchor is not None:
+            href += "#" + e.anchor
+        return "<span data-href='" + href + "'>" + e.filename + "</span>"
 
     @staticmethod
     def element_link_html(element):

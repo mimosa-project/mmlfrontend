@@ -2,6 +2,8 @@ __pycache__/
 *.py[cod]
 
 *.xml
+*.tar
+*.tar.gz
 
 !/codeStyleSettings.xml
 !/copyright/*.xml

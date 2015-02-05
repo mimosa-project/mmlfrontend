@@ -5,7 +5,7 @@ __author__ = 'nakasho'
 import urllib.request
 from urllib.request import FileHandler
 from html.parser import HTMLParser
-
+import os
 
 class Downloader(HTMLParser):
     def __init__(self):
@@ -28,11 +28,16 @@ class Downloader(HTMLParser):
             response.close()
 
     def download(self, to_dir):
-        for filename in self.files:
+        for i, filename in enumerate(self.files):
+            print("download {}/{}".format(i, len(self.files)))
             urllib.request.urlretrieve(self._path + '/' + filename, to_dir + '/' + filename)
 
 if __name__ == "__main__":
     downloader = Downloader()
-    downloader.read_index('http://mizar.org/version/current/html/mml-articles')
-    downloader.download()
+    downloader.read_index('http://mizar.org/version/current/html')
+
+    to_dir = os.path.dirname(__file__) + '/../downloaded'
+    if not os.path.exists(to_dir):
+        os.makedirs(to_dir)
+    downloader.download(to_dir)
     downloader.close()

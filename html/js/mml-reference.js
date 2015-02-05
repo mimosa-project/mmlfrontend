@@ -285,6 +285,11 @@
       anchor = links[1];
       return jump_to(filename, anchor, true);
     });
+    $("#content").on("click", "span[data-href]", function() {
+      var url;
+      url = ARTICLE_URL + $(this).attr("data-href");
+      return window.open(url, '_blank').focus();
+    });
     return $("#search-box").keyup(function() {
       var query, searcher;
       $("#result ul").empty();

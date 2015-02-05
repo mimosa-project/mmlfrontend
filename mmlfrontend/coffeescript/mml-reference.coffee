@@ -160,6 +160,11 @@ $(document).ready ->
     jump_to(filename, anchor, true)
   )
 
+  $("#content").on("click", "span[data-href]", ->
+    url = ARTICLE_URL + $(@).attr("data-href")
+    window.open(url, '_blank').focus()
+  )
+
   $("#search-box").keyup ->
     $("#result ul").empty()
     query = $(@).val()
