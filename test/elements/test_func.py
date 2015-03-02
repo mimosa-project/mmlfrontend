@@ -62,3 +62,19 @@ class TestFunc(TestElement):
             self.assertEqual('kw', funcs[i].keyword_node.attrib.get('class'), i)
             self.assertEqual(i in synonym_indices, funcs[i].is_synonym(), i)
             self.assertEqual("abcmiz_1", funcs[i].filename)
+
+    def test_read_funct_1(self):
+        reader = self.read_by_name("funct_1")
+        funcs = self.filter_by_type(reader.elements, 'func')
+        self.assertEqual(7, len(funcs))
+
+        redefine_indices = [1, 4, 5]
+        synonym_indices = [2]
+        names = ['.', 'rng', '*', '"', '.:', '"', 'the_value_of']
+        for i in range(len(funcs)):
+            self.assertEqual(names[i], funcs[i].symbol)
+            self.assertEqual('kw', funcs[i].keyword_node.attrib.get('class'), i)
+            self.assertEqual(i in redefine_indices, funcs[i].is_redefine(), i)
+            self.assertEqual(i in synonym_indices, funcs[i].is_synonym(), i)
+            self.assertEqual("funct_1", funcs[i].filename)
+

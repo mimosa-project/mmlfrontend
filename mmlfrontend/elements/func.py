@@ -22,9 +22,9 @@ class Func(Element):
         return "func"
 
     def find_symbol(self):
-        finder = "./following::a[contains(@title, ':" + self.type() + ".')][1]"
+        finder = "./following::a[contains(@title, ':func.') or contains(@title, ':NK.')][1]"
         candidates = self.keyword_node.xpath(finder)
-        if len(candidates):
+        if len(candidates) > 0:
             func_symbol = candidates[0]
             name = func_symbol.text.strip()
 
