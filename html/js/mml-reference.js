@@ -16,8 +16,10 @@
       this.highlight_as_is = __bind(this.highlight_as_is, this);
       this.highlight_substring = __bind(this.highlight_substring, this);
       this.build_highlighters = __bind(this.build_highlighters, this);
+      this.match_containing_substrings = __bind(this.match_containing_substrings, this);
       this.match_containing = __bind(this.match_containing, this);
       this.match_containing_as_is = __bind(this.match_containing_as_is, this);
+      this.match_beginning_substrings = __bind(this.match_beginning_substrings, this);
       this.match_beginning = __bind(this.match_beginning, this);
       this.match_beginning_as_is = __bind(this.match_beginning_as_is, this);
       this.build_regexps = __bind(this.build_regexps, this);
@@ -69,6 +71,20 @@
       return true;
     };
 
+    Searcher.prototype.match_beginning_substrings = function(symbol, query, regexps) {
+      var i, pos, queries, _i, _ref;
+      queries = query.split(/\s+/);
+      for (i = _i = 0, _ref = queries.length; 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
+        pos = symbol.toLowerCase().indexOf(queries[i]);
+        if (i === 0 && pos !== 0) {
+          return false;
+        } else if (pos < 0) {
+          return false;
+        }
+      }
+      return true;
+    };
+
     Searcher.prototype.match_containing_as_is = function(symbol, query, regexps) {
       return symbol.toLowerCase().indexOf(query) >= 0;
     };
@@ -84,6 +100,19 @@
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         r = _ref[_i];
         if (!ls.match(r)) {
+          return false;
+        }
+      }
+      return true;
+    };
+
+    Searcher.prototype.match_containing_substrings = function(symbol, query, regexps) {
+      var pos, q, queries, _i, _len;
+      queries = query.split(/\s+/);
+      for (_i = 0, _len = queries.length; _i < _len; _i++) {
+        q = queries[_i];
+        pos = symbol.toLowerCase().indexOf(q);
+        if (pos < 0) {
           return false;
         }
       }
@@ -140,21 +169,23 @@
         i = state.counter % len;
         j = Math.floor(state.counter / len);
         ++state.counter;
-        if (j > 3) {
+        if (j > 4) {
           break;
         }
         if (state[String(i)]) {
-          break;
+          continue;
         }
         _ref1 = (function() {
           switch (j) {
             case 0:
               return [this.match_beginning_as_is, this.highlight_as_is];
             case 1:
-              return [this.match_beginning, this.highlight_query];
+              return [this.match_beginning_substrings, this.highlight_query];
             case 2:
-              return [this.match_containing_as_is, this.highlight_as_is];
+              return [this.match_containing_substrings, this.highlight_query];
             case 3:
+              return [this.match_beginning, this.highlight_query];
+            case 4:
               return [this.match_containing, this.highlight_query];
             default:
               return [null, null];

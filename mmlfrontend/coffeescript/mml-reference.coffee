@@ -29,6 +29,16 @@ class Searcher
       return false unless ls.match(r)
     return true
 
+  match_beginning_substrings: (symbol, query, regexps) =>
+    queries = query.split(/\s+/)
+    for i in [0 ... queries.length]
+      pos = symbol.toLowerCase().indexOf(queries[i])
+      if i == 0 and pos != 0
+        return false
+      else if pos < 0
+        return false
+    return true
+
   match_containing_as_is: (symbol, query, regexps) =>
     symbol.toLowerCase().indexOf(query) >= 0
 
@@ -38,6 +48,14 @@ class Searcher
     return false unless ls.indexOf(q) > 0
     for r in regexps[1...]
       return false unless ls.match(r)
+    return true
+
+  match_containing_substrings: (symbol, query, regexps) =>
+    queries = query.split(/\s+/)
+    for q in queries
+      pos = symbol.toLowerCase().indexOf(q)
+      if pos < 0
+        return false
     return true
 
   # highlight
@@ -69,15 +87,16 @@ class Searcher
       i = state.counter % len
       j = Math.floor(state.counter / len)
       ++state.counter
-      break if j > 3
-      break if state[String(i)]
+      break if j > 4
+      continue if state[String(i)]
 
       [match_fn, hlt_fn] =
         switch j
           when 0 then [@match_beginning_as_is, @highlight_as_is]
-          when 1 then [@match_beginning, @highlight_query]
-          when 2 then [@match_containing_as_is, @highlight_as_is]
-          when 3 then [@match_containing, @highlight_query]
+          when 1 then [@match_beginning_substrings, @highlight_query]
+          when 2 then [@match_containing_substrings, @highlight_query]
+          when 3 then [@match_beginning, @highlight_query]
+          when 4 then [@match_containing, @highlight_query]
           else [null, null]
 
       symbol = index_data.symbols[i]
