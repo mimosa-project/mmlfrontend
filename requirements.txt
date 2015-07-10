@@ -1,2 +1,8 @@
-lxml
-natsort
+# This file may be used to create an environment using:
+# $ conda create --name <env> --file <this file>
+# platform: win-64
+lxml=3.4.4=py34_0
+natsort=3.5.0=py34_0
+pip=7.1.0=py34_0
+python=3.4.3=0
+setuptools=18.0.1=py34_0
