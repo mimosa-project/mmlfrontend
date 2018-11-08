@@ -60,10 +60,10 @@ Dependencies
 
 License
 ===========================================================
-MML-frontend is Copyright (c) 2015 Kazuhisa Nakasho, a graduate student in Shinshu University.
+MML-frontend is Copyright (c) Kazuhisa Nakasho.
 This program code and its product are published under GNU General Public License version 3 or later.
 See [LICENSE.md](LICENSE.md) for more details.
 
 Contact
 ===========================================================
-E-mail: 13st205f@shinshu-u.ac.jp
+E-mail: nakasho@yamaguchi-u.ac.jp
