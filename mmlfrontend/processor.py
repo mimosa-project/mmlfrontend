@@ -9,6 +9,7 @@ import time
 from mmlfrontend.reader import *
 from mmlfrontend.composer import *
 from mmlfrontend.writer import *
+from mmlfrontend.elements.element import *
 import locale
 from natsort import humansorted
 locale.setlocale(locale.LC_ALL, '')
@@ -16,6 +17,7 @@ locale.setlocale(locale.LC_ALL, '')
 
 class Processor:
     def __init__(self):
+        Element._total_num = 0
         self.elements = []
         self.contents = []
 

@@ -37,6 +37,8 @@ class TestProcessor(TestCase):
 
     def copy_resources(self):
         files = ["index.html", "start.html", "js/mml-var.js", "js/mml-reference.js", "css/mml-reference.css"]
+        os.makedirs(self._local_dir + '/data/processor/js/', exist_ok=True)
+        os.makedirs(self._local_dir + '/data/processor/css/', exist_ok=True)
         for file in files:
             src = self._local_dir + "/../html/" + file
             dst = self._local_dir + "/data/processor/" + file
