@@ -1,4 +1,4 @@
-MML-frontend is Copyright (c) 2015 Kazuhisa Nakasho, a graduate student in Shinshu University.
+MML-frontend is Copyright (c) 2015 - 2019 Kazuhisa NAKASHO.
 
 MML-frontend is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -43,7 +43,7 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ## Mizar Mathematical Library
-Copyright © 1989-2015 Association of Mizar Users
+Copyright © 1989-2019 Association of Mizar Users
                       (Stowarzyszenie Uzytkownikow Mizara, Białystok, Poland).
 This code can be distributed under the GNU General Public Licence
 version 3.0 or later, or the Creative Commons
@@ -55,7 +55,7 @@ licenses, or see http://www.gnu.org/licenses/gpl.html and
 http://creativecommons.org/licenses/by-sa/3.0/
 
 ## MWiki (Mizar Wiki)
-Copyright © 1989-2015 Jesse Alama and Josef Urban
+Copyright © 1989-2019 Jesse Alama and Josef Urban
 
 MWiki is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

@@ -36,7 +36,7 @@ if __name__ == "__main__":
     downloader = Downloader()
     downloader.read_index('http://mizar.org/version/current/html')
 
-    to_dir = os.path.dirname(__file__) + '/../downloaded'
+    to_dir = os.path.abspath(os.path.dirname(__file__)) + '/../../downloaded'
     if not os.path.exists(to_dir):
         os.makedirs(to_dir)
     downloader.download(to_dir)

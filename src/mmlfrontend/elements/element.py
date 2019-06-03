@@ -55,7 +55,7 @@ class Element:
                 maybes = node.xpath('./following::a[@title][1]')
                 if len(maybes):
                     title = maybes[0].attrib.get('title')
-                    if re.search(':' + cls.type() + '\.', title):
+                    if re.search(':' + cls.type() + '.', title):
                         results.append(node)
         return results
 

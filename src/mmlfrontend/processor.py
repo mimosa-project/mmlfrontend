@@ -63,7 +63,7 @@ class Processor:
             content_writer.write(contents_dir + '/' + content.filename())
 
 if __name__ == '__main__':
-    from_dir = os.path.dirname(__file__) + '/../downloaded'
-    to_dir = os.path.dirname(__file__) + '/../html'
+    from_dir = os.path.abspath(os.path.dirname(__file__)) + '/../../downloaded'
+    to_dir = os.path.abspath(os.path.dirname(__file__)) + '/../../html'
     processor = Processor()
     processor.execute(from_dir, to_dir)

@@ -42,14 +42,39 @@ Installation
 
 Usage
 ===========================================================
-1. Run downloader.py to download HTML-ized MML articles.
+1. Install package tools and start python shell by pipenv
+  ```Shell
+  $ pipenv install
+  ```
+2. Start pipenv shell
+  ```Shell
+  $ pipenv shell
+  ```
+3. Run downloader.py to download HTML-ized MML articles.
   * It will download from http://mizar.org/version/current/html by default.
   * You can change the URL by modifying the following code in 'mmlfrontend/downloader.py'
     ```
     downloader.read_index('http://mizar.org/version/current/html')
     ```
   * You also have to change article_path in 'mmlfrontend/html/js/mml-var.js' before you deploy.
-2. Run processor.py to create HTML files. The files will be created in 'html' folder.
+4. Run processor.py to create HTML files. The files will be created in 'html' folder.
+
+Unit Test
+===========================================================
+* Run all unit tests
+  * Run test as follows:
+    ```Shell
+    $ pipenv install --dev -e .  
+    $ python setup.py test
+    ```
+
+* Run one unit test
+  * Modify setup.cfg and comment out "python_files" section
+  * Run test as follows:
+    ```Shell
+    $ pipenv install --dev -e .  
+    $ python setup.py test
+    ```
 
 Dependencies
 ===========================================================

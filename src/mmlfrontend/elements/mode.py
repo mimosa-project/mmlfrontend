@@ -28,20 +28,18 @@ class Mode(Element):
         if name.endswith(' of'):
             name = name[:-3]
 
-        """
-        # if symbol is followed by "of", include it.
-        ms = self.main_sentence
-        if ms is not None:
-            text = ms.text_content()
-            m = re.search("mode[^;]*?(->|means)", text)
-            if m and "of" in m.group(0).split():
-                name += " of"
-        elif node.text.strip() == "synonym":
-            text = self.defblock.text_content()
-            m = re.search("synonym\s+" + name + "\s+of", text)
-            if m:
-                name += " of"
-        """
+        # # if symbol is followed by "of", include it.
+        # ms = self.main_sentence
+        # if ms is not None:
+        #     text = ms.text_content()
+        #     m = re.search("mode[^;]*?(->|means)", text)
+        #     if m and "of" in m.group(0).split():
+        #         name += " of"
+        # elif node.text.strip() == "synonym":
+        #     text = self.defblock.text_content()
+        #     m = re.search("synonym\s+" + name + "\s+of", text)
+        #     if m:
+        #         name += " of"
 
         return name
 
